@@ -42,3 +42,9 @@ for i in os.listdir("."):
 print("W katalogu pracowników jest coś takiego")
 for i in os.listdir("C:\\Users\PC\\PycharmProjects"):
      print(i)
+
+import re
+
+os.chdir("C:\\Users\\PC\\Desktop") # change directory
+for file in os.listdir('.'): # list directory w aktualnej lokalizacji
+    print(file)
