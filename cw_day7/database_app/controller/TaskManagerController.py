@@ -6,20 +6,28 @@ from cw_day7.database_app.model.Task import Task
 from cw_day7.database_app.model.User import User
 
 
+def toExport():
+    connection = pymysql.connect(
+        host=secret.host,
+        user=secret.username,
+        password=secret.password,
+        db=secret.database_name,
+        charset='utf8',
+        port=3305
+    )
+    print("...CONNECTED...")
+    cursor = connection.cursor()
+    return connection, cursor
+
+
 class TaskManagerController:
 
     def __init__(self):
+        db = toExport()
+        self.connection = db[0]
+        self.cursor = db[1]
 
-        self.connection = pymysql.connect(
-            host=secret.host,
-            user=secret.username,
-            password=secret.password,
-            db=secret.database_name,
-            charset='utf8',
-            port=3305
-        )
-        print("...CONNECTED....")
-        self.cursor = self.connection.cursor()
+
 
     def insertUser(self, email, password, name, lastname, gender):
         u = User(email, password, name, lastname, gender)
